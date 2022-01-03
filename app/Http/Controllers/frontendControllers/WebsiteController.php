@@ -16,6 +16,14 @@ class WebsiteController extends Controller
     {
         return view("frontend.home");
     }
+    public function file_form(Request $request){
+        return $request->all();
+    }
+    public function convertFile(Request $request){
+        $file=$request->file('file');
+        return $file->getClientOriginalType();
+        return $request->all();
+    }
 
     /**
      * Show the form for creating a new resource.

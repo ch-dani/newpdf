@@ -158,40 +158,41 @@
     <div class="switch-language ">
         <div class="language-active ">
             <a class="language-link SelectLanguage ">
- 	       	<img src="/storage/flags/United States of America (USA).png "/>English
+ 	       	<img src="{{asset('frontend-assets/freeconvert/flags')}}/United States of America (USA).png "/>English
             </a>
         </div>
                 <ul class="languagepicker ">
-                    <li><a class="language-link SelectLanguage " href="/fr/ " data-id="2 "><img src="/storage/flags/France.png "/>Français</a></li>
-                    <li><a class="language-link SelectLanguage " href="/de/ " data-id="3 "><img src="/storage/flags/Germany.png "/>Deutsch</a></li>
-                    <li><a class="language-link SelectLanguage " href="/da/ " data-id="4 "><img src="/storage/flags/Denmark.png "/>Dansk</a></li>
-                    <li><a class="language-link SelectLanguage " href="/es/ " data-id="5 "><img src="/storage/flags/Spain.png "/>Español</a></li>
+                    <li><a class="language-link SelectLanguage " href="/fr/ " data-id="2 "><img src="{{asset('frontend-assets/freeconvert/flags/France.png')}}"/>Français</a></li>
+                    
+                    <li><a class="language-link SelectLanguage " href="/de/ " data-id="3 "><img src="{{asset('frontend-assets/freeconvert/flags/Germany.png')}}"/>Deutsch</a></li>
+                    <li><a class="language-link SelectLanguage " href="/da/ " data-id="4 "><img src="{{asset('frontend-assets/freeconvert/flags/Denmark.png')}}"/>Dansk</a></li>
+                    <li><a class="language-link SelectLanguage " href="/es/ " data-id="5 "><img src="{{asset('frontend-assets/freeconvert/flags/Spain.png')}} "/>Español</a></li>
 
-                    <li><a class="language-link SelectLanguage " href="/id/ " data-id="6 "><img src="/storage/flags/Indonesia.png "/>Bahasa Indonesia</a></li>
+                    <li><a class="language-link SelectLanguage " href="/id/ " data-id="6 "><img src="{{asset('frontend-assets/freeconvert/flags')}}/Indonesia.png"/>Bahasa Indonesia</a></li>
 
-                    <li><a class="language-link SelectLanguage " href="/it/ " data-id="7 "><img src="/storage/flags/Italy.png "/>Italiano</a></li>
+                    <li><a class="language-link SelectLanguage " href="/it/ " data-id="7 "><img src="{{asset('frontend-assets/freeconvert/flags')}}/Italy.png "/>Italiano</a></li>
 
-                    <li><a class="language-link SelectLanguage " href="/ja/ " data-id="8 "><img src="/storage/flags/Japan.png "/>日本語</a></li>
+                    <li><a class="language-link SelectLanguage " href="/ja/ " data-id="8 "><img src="{{asset('frontend-assets/freeconvert/flags')}}/Japan.png "/>日本語</a></li>
 
-                    <li><a class="language-link SelectLanguage " href="/no/ " data-id="9 "><img src="/storage/flags/Norway.png "/>Norsk</a></li>
+                    <li><a class="language-link SelectLanguage " href="/no/ " data-id="9 "><img src="{{asset('frontend-assets/freeconvert/flags')}}/Norway.png "/>Norsk</a></li>
 
-                    <li><a class="language-link SelectLanguage " href="/pl/ " data-id="10 "><img src="/storage/flags/Poland.png "/>Polski</a></li>
+                    <li><a class="language-link SelectLanguage " href="/pl/ " data-id="10 "><img src="{{asset('frontend-assets/freeconvert/flags')}}/Poland.png "/>Polski</a></li>
 
-                    <li><a class="language-link SelectLanguage " href="/pt/ " data-id="11 "><img src="/storage/flags/Portugal.png "/>Português</a></li>
+                    <li><a class="language-link SelectLanguage " href="/pt/ " data-id="11 "><img src="{{asset('frontend-assets/freeconvert/flags')}}/Portugal.png "/>Português</a></li>
 
-                    <li><a class="language-link SelectLanguage " href="/ru/ " data-id="12 "><img src="/storage/flags/Russian Federation.png "/>Русский</a></li>
+                    <li><a class="language-link SelectLanguage " href="/ru/ " data-id="12 "><img src="{{asset('frontend-assets/freeconvert/flags')}}/Russian Federation.png "/>Русский</a></li>
 
-                    <li><a class="language-link SelectLanguage " href="/sv/ " data-id="13 "><img src="/storage/flags/Sweden.png "/>Svenska</a></li>
+                    <li><a class="language-link SelectLanguage " href="/sv/ " data-id="13 "><img src="{{asset('frontend-assets/freeconvert/flags')}}/Sweden.png "/>Svenska</a></li>
 
-                    <li><a class="language-link SelectLanguage " href="/tr/ " data-id="14 "><img src="/storage/flags/Turkey.png "/>Türkçe</a></li>
+                    <li><a class="language-link SelectLanguage " href="/tr/ " data-id="14 "><img src="{{asset('frontend-assets/freeconvert/flags')}}/Turkey.png "/>Türkçe</a></li>
 
-                    <li><a class="language-link SelectLanguage " href="/uk/ " data-id="15 "><img src="/storage/flags/Ukraine.png "/>Українська</a></li>
+                    <li><a class="language-link SelectLanguage " href="/uk/ " data-id="15 "><img src="{{asset('frontend-assets/freeconvert/flags')}}/Ukraine.png "/>Українська</a></li>
 
-                    <li><a class="language-link SelectLanguage " href="/vi/ " data-id="16 "><img src="/storage/flags/Viet Nam.png "/>Tiếng Việt</a></li>
+                    <li><a class="language-link SelectLanguage " href="/vi/ " data-id="16 "><img src="{{asset('frontend-assets/freeconvert/flags')}}/Viet Nam.png "/>Tiếng Việt</a></li>
 
-                    <li><a class="language-link SelectLanguage " href="/zh/ " data-id="17 "><img src="/storage/flags/China.png "/>中文(简体)</a></li>
+                    <li><a class="language-link SelectLanguage " href="/zh/ " data-id="17 "><img src="{{asset('frontend-assets/freeconvert/flags')}}/China.png "/>中文(简体)</a></li>
 
-                    <li><a class="language-link SelectLanguage " href="/zh-TW/ " data-id="18 "><img src="/storage/flags/China.png "/>中文(繁體) </a></li>
+                    <li><a class="language-link SelectLanguage " href="/zh-TW/ " data-id="18 "><img src="{{asset('frontend-assets/freeconvert/flags')}}/China.png "/>中文(繁體) </a></li>
                 </ul>
             </div>
         </div>
