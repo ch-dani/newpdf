@@ -17,3 +17,5 @@ use App\Http\Controllers\frontendControllers\WebsiteController;
 Route::get('/',[WebsiteController::class,'index'])->name('landingpage');
 Route::post('file',[WebsiteController::class,'convertFile'])->name('convertFile');
 
+Route::post('send-file-to-server',[WebsiteController::class,'sendFilesToServer'])->name('sendFilesToServer');
+

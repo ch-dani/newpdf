@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <meta name="csrf-token" content="xGeoE3PH7ezG3SmNALprFlw8FwLblQGnLLvOoazm">
     <meta name="keywords" content="Pdf to word, Free Pdf editor, Free convert Pdf, Convert Pdf to word, Pdf converter, Online Pdf converter, Online Pdf editor, Pdf to word converter free, Jpg to Pdf converter, Editor Pdf online free">
@@ -285,6 +286,14 @@
 
 <script src="https://freeconvertpdf.com/freeconvert/js/main_alex.js"></script>
 <script src="https://freeconvertpdf.com/freeconvert/js/equal-heights.js"></script>
+
+<script type="text/javascript">
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+</script>
 </body>
 
 </html>

@@ -1,12 +1,20 @@
 @extends('frontend.layouts.master')
 @section("title","home page")
 <form action="{{route('convertFile')}}" enctype="multipart/form-data" method="post">
-        @csrf
-        <input type="file" name="file">
-        <input type="submit" value="submit"> 
+    @csrf
+    <input type="file" name="file">
+    <input type="submit">
 </form>
 
-@section("main_contet")
+<script>
+    alert("done");
+    var docxConverter = require('docx-pdf');
+    $("document").ready(function(){
+        alert("hehehe");
+    })
+</script>
+
+@section("main_conten")
 <main class="file_not_loaded">
     <section class="section_top before_upload r_upload_section tool_section">
         <div class="container">
@@ -68,43 +76,45 @@
                 </div>
             </div>
                <!-- show file section here -->
-               <section style="" id="showUploadedFilesSection">
-                    <div class="convert_docs_wrapper" id="pages-pdf">
-                        <div class="convert_doc left_doc">
-                            <div class="convert_doc_content">
-                                <form action="#" enctype="multipart/form-data" method="POST">
-                                    <input id="addMoreFiles" type="file" accept="application/msword" title="Upload" multiple="multiple" data-scope="task-file" name="file" class="fileupload upload-file-tool">
-                                </form>
-                                <h4 class="title_convert_doc">Choose file</h4>
-                                <div class="icon_add_doc">
-                                    <img src="https://freeconvertpdf.com/freeconvert/img/icon-add-file.svg" alt="">
-                                    <div class="icon_add_select" id="docSelectBtn">
-                                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1.76664 0.741665L4.99997 3.975L8.2333 0.741665C8.31046 0.664513 8.40205 0.603313 8.50285 0.561559C8.60365 0.519805 8.71169 0.498314 8.8208 0.498314C8.92991 0.498314 9.03795 0.519805 9.13876 0.561559C9.23956 0.603313 9.33115 0.664513 9.4083 0.741665C9.48546 0.818816 9.54665 0.910408 9.58841 1.01121C9.63016 1.11202 9.65165 1.22006 9.65165 1.32916C9.65165 1.43827 9.63016 1.54631 9.58841 1.64712C9.54665 1.74792 9.48546 1.83951 9.4083 1.91666L5.5833 5.74167C5.50621 5.81892 5.41463 5.88021 5.31382 5.92203C5.21301 5.96384 5.10494 5.98537 4.9958 5.98537C4.88666 5.98537 4.77859 5.96384 4.67778 5.92203C4.57697 5.88021 4.4854 5.81892 4.4083 5.74167L0.583303 1.91666C0.50605 1.83957 0.44476 1.748 0.402942 1.64718C0.361124 1.54637 0.3396 1.4383 0.3396 1.32916C0.3396 1.22002 0.361124 1.11196 0.402942 1.01114C0.44476 0.910333 0.50605 0.818759 0.583303 0.741665C0.908303 0.424998 1.44164 0.416665 1.76664 0.741665Z" fill="#979797"></path>
-                                        </svg>
-                                    </div>
+            <section style="" id="showUploadedFilesSection">
+                
+                <div class="convert_docs_wrapper" id="pages-pdf">
+                    <div class="convert_doc left_doc">
+                        <div class="convert_doc_content">
+                            <form action="#" enctype="multipart/form-data" method="POST">
+                                <input id="addMoreFiles" type="file" accept="application/msword" title="Upload" multiple="multiple" data-scope="task-file" name="file" class="fileupload upload-file-tool">
+                            </form>
+                            <h4 class="title_convert_doc">Choose file</h4>
+                            <div class="icon_add_doc">
+                                <img src="https://freeconvertpdf.com/freeconvert/img/icon-add-file.svg" alt="">
+                                <div class="icon_add_select" id="docSelectBtn">
+                                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.76664 0.741665L4.99997 3.975L8.2333 0.741665C8.31046 0.664513 8.40205 0.603313 8.50285 0.561559C8.60365 0.519805 8.71169 0.498314 8.8208 0.498314C8.92991 0.498314 9.03795 0.519805 9.13876 0.561559C9.23956 0.603313 9.33115 0.664513 9.4083 0.741665C9.48546 0.818816 9.54665 0.910408 9.58841 1.01121C9.63016 1.11202 9.65165 1.22006 9.65165 1.32916C9.65165 1.43827 9.63016 1.54631 9.58841 1.64712C9.54665 1.74792 9.48546 1.83951 9.4083 1.91666L5.5833 5.74167C5.50621 5.81892 5.41463 5.88021 5.31382 5.92203C5.21301 5.96384 5.10494 5.98537 4.9958 5.98537C4.88666 5.98537 4.77859 5.96384 4.67778 5.92203C4.57697 5.88021 4.4854 5.81892 4.4083 5.74167L0.583303 1.91666C0.50605 1.83957 0.44476 1.748 0.402942 1.64718C0.361124 1.54637 0.3396 1.4383 0.3396 1.32916C0.3396 1.22002 0.361124 1.11196 0.402942 1.01114C0.44476 0.910333 0.50605 0.818759 0.583303 0.741665C0.908303 0.424998 1.44164 0.416665 1.76664 0.741665Z" fill="#979797"></path>
+                                    </svg>
                                 </div>
-                                <h5 class="sub_title_convert_doc">or drop files here</h5>
                             </div>
+                            <h5 class="sub_title_convert_doc">or drop files here</h5>
                         </div>
                     </div>
+                </div>
+            
 
-                    <div class="btn btn-sm" id="processPdf">
-                        <div class="downloader__upload" style="width:auto !important">
-                            <div class="downloader__icon">
-                                <img src="https://freeconvertpdf.com/freeconvert/img/download_arrow.svg">
-                            </div>
-                            <div class="downloader__text save-pdf">Process PDF</div>
-                            <div class="downloader__arrow"></div>
+                <div class="btn btn-sm" id="processPdf">
+                    <div class="downloader__upload" style="width:auto !important">
+                        <div class="downloader__icon">
+                            <img src="https://freeconvertpdf.com/freeconvert/img/download_arrow.svg">
                         </div>
+                        <div class="downloader__text save-pdf">Process PDF</div>
+                        <div class="downloader__arrow"></div>
                     </div>
-                </section>
+                </div>
+            </section>
         </div>
     </section>
 
     
 
-
+    <input type="hidden" name="allUploadedFiles[]" id="allUploadedFiles">
     <!-- uploader ends -->
 
     <!-- uploaded image  process or add more section -->
@@ -120,13 +130,45 @@
 @section("scripts")
 <script>
     $("document").ready(function(){
+        
+        
         $("#showUploadedFilesSection").hide();
         $(".user_pdf").on("change",function(){
             if($(this)[0].files.length>0){
-                var raw=show_uploadedFiles($(this)[0].files);
-                $("#showUploadedFilesSection #pages-pdf").append(raw);
-                $(".downloader").hide();
-                $("#showUploadedFilesSection").show();
+                alert("here"+$(this)[0].files);
+                // formData.append('file[]', $(this)[0].files); 
+                var formData= new FormData();
+                formData.append("name","dan11i");
+                formData.append("name1","da1ni");
+                formData.append("name2","d2ani");
+                formData.append("name3","dan23i");
+                for (var key in formData) {
+                    alert(key);
+                    alert(formData[key]);
+                    console.log(key, formData[key]);
+                    
+                }
+                // $.ajax({
+                //     type:"post",
+                //     url:"{{route('sendFilesToServer')}}",
+                //     dataType: 'json',
+                //     contentType: false,
+                //     processData: false,
+                //     data:{'formdata':formData},
+                //     success:function(data){
+                //         console.log(data);
+                //     },
+                //     error:function(xhr,error,http){
+                //         console.log("error");
+                //         console.log(xhr);
+                //         console.log(xhr.responseText)
+                //     }
+                // }); 
+                // console.log("directFn");
+                // var raw=show_uploadedFiles($(this)[0].files);
+                // $("#showUploadedFilesSection #pages-pdf").append(raw);
+                // $(".downloader").hide();
+                // $("#showUploadedFilesSection").show();
             }
         });
         $("#addMoreFiles").on("change",function(){
@@ -137,9 +179,27 @@
             }
         });
         $("#processPdf").on("click",function(){
-            alert("clikced");
+            // alert("clikced");
+            // console.log(formData.files);
+            alert(formData);
+            $.ajax({
+                type:"post",
+                url:"{{route('sendFilesToServer')}}",
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                data:{'formdata':formData},
+                success:function(data){
+                    console.log(data);
+                },
+                error:function(xhr,error,http){
+                    console.log("error");
+                    console.log(xhr);
+                    console.log(xhr.responseText)
+                }
+            }); 
             var file=$(".user_pdf").val();
-            alert(file.files.length);
+            // alert(file.files.length);
         });
 
 
@@ -152,7 +212,9 @@
             
     
             $.each(allFiles,function(index,value){
-                alert(this);
+                // formData.append("files[]",value.files);
+
+                alert(value.files);
                 var url=URL.createObjectURL(value);
                 console.log(url);
                 output +='<div class="convert_doc right_doc image-canvas-li" data-number="0"><div class="convert_doc_content"><div class="download_convert_doc"><img src="'+url+'" alt=""></div></div><div class="download_icon_doc remove_icon_doc"><a class="remove-uploaded-file" href="#" data-number="0"><img src="frontend-assets/freeconvert/img/close_icon.svg"></a></div><div class="download_icon_doc"><a class="save-image-page" href="#" data-number="0"><img src="frontend-assets/freeconvert/img/download_arrow.svg"></a></div><div class="name_doc"><h6>'+value.name+'</h6></div></div>';
