@@ -1,20 +1,6 @@
 @extends('frontend.layouts.master')
 @section("title","home page")
-<form action="{{route('convertFile')}}" enctype="multipart/form-data" method="post">
-    @csrf
-    <input type="file" name="file">
-    <input type="submit">
-</form>
-
-<script>
-    alert("done");
-    var docxConverter = require('docx-pdf');
-    $("document").ready(function(){
-        alert("hehehe");
-    })
-</script>
-
-@section("main_conten")
+@section("main_content")
 <main class="file_not_loaded">
     <section class="section_top before_upload r_upload_section tool_section">
         <div class="container">
@@ -38,11 +24,13 @@
                 <div class="xxz_zz downloader__upload-wrapper">
                     <form method="post" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="PoEmRMJfH9OI9GFH0hzVO3R1FlQ1sL0Td1uPgf9D" id="editor_csrf">
+                        <input type="hidden" name="action" id="conversionAction" value="{{isset($info['action'])?$info['action']:''}}">
+
                         <div class="downloader__doshed">
-                            <input class="user_pdf" type="file" accept="application/pdf">
+                            <input class="user_pdf" type="file" accept="{{isset($info['accept'])?$info['accept']:'application/pdf'}}">
                             <div class="downloader__upload">
                                 <div class="downloader__icon"><img src="https://freeconvertpdf.com/freeconvert/img/doc.svg"></div>
-                                <div class="downloader__text"> Upload PDF file </div>
+                                <div class="downloader__text">Upload PDF file </div>
                                 <div class="downloader__arrow" id="docSelectBtn">
                                     <img src="https://freeconvertpdf.com/freeconvert/img/arrow-white-down.svg">
                                 </div>
@@ -120,57 +108,106 @@
     <!-- uploaded image  process or add more section -->
   
     <!-- ends add more section -->
-    
+    @include("frontend.modals.selectconverter")
         
 	
 </main>
 
 
+
+
+
 @endsection
 @section("scripts")
+<script src="{{asset('frontend-assets/js/dblite.js')}}"></script>
 <script>
     $("document").ready(function(){
-        
-        
-        $("#showUploadedFilesSection").hide();
-        $(".user_pdf").on("change",function(){
-            if($(this)[0].files.length>0){
-                alert("here"+$(this)[0].files);
-                // formData.append('file[]', $(this)[0].files); 
-                var formData= new FormData();
-                formData.append("name","dan11i");
-                formData.append("name1","da1ni");
-                formData.append("name2","d2ani");
-                formData.append("name3","dan23i");
-                for (var key in formData) {
-                    alert(key);
-                    alert(formData[key]);
-                    console.log(key, formData[key]);
-                    
-                }
-                // $.ajax({
-                //     type:"post",
-                //     url:"{{route('sendFilesToServer')}}",
-                //     dataType: 'json',
-                //     contentType: false,
-                //     processData: false,
-                //     data:{'formdata':formData},
-                //     success:function(data){
-                //         console.log(data);
-                //     },
-                //     error:function(xhr,error,http){
-                //         console.log("error");
-                //         console.log(xhr);
-                //         console.log(xhr.responseText)
-                //     }
-                // }); 
-                // console.log("directFn");
-                // var raw=show_uploadedFiles($(this)[0].files);
-                // $("#showUploadedFilesSection #pages-pdf").append(raw);
-                // $(".downloader").hide();
-                // $("#showUploadedFilesSection").show();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        $("#showUploadedFilesSection").hide();
+        $(".user_pdf").on("click",function(e){
+            var conVal=$("#conversionAction").val();
+            if(conVal==null || conVal==''){
+                e.preventDefault();
+                $("#selectConverterModal").addClass("active");
+            }
+        })
+        $(".user_pdf").on("change",function(){
+            var loggedInUser="{{Auth::user()}}";
+            var noOfFiles=$(this)[0].files.length;
+            if(loggedInUser){
+                alert("user is lsogged in");
+            }else{
+                alert("not logged in");
+                if(noOfFiles>1){
+                    alert("select only 1 file...more than 1 files options is only for members or sign in to get this done");
+                }else{
+                    formdata=new FormData();
+                    formdata.append("action",$("#conversionAction").val());
+                    formdata.append("file",$(this)[0].files[0]);
+                    alert("shound ajax");
+                    console.log(formdata);
+                    
+                    $.ajax({
+                        type:"post",
+                        url:"{{route('sendFileToServer')}}",
+                        processData: false,
+                        contentType: false,
+                        data:formdata,
+                        success:function(data){
+                            if(data.status){
+                                convertFileFromPDFCO(data);
+                            }
+                           
+                        },
+                        error:function(xhr,http,error){
+                            alert("error man");
+                            console.log(xhr+http+error);
+                            console.log(xhr.responseText);
+                        }
+                    })
+                }
+            }
+            
+            alert("clicked");
+            var action=$("#conversionAction").val();
+            // if(action==''||action==null){
+            //     $("#selectConverterModal").addClass("active");
+            // }
+            if($(this)[0].files.length>0){
+                var data=show_uploadedFiles($(this)[0].files);
+                $("#showUploadedFilesSection").show();
+                $("#showUploadedFilesSection").append(data);
+            }
+        });
+        function convertFileFromPDFCO(obj){
+            
+            $.ajax({
+                url:"{{env('DOCS_API_URL')}}"+obj.endpoint,
+                type:"post",
+                headers:{
+                    "x-api-key":"{{env('DOCS_API_KEY')}}",
+                    "content_type":"application/json",
+                },
+                data:{
+                    "url":obj.file_link,
+                    "pages": "0-",
+                    "name":obj.fileName
+                },
+                success:function(response){
+                    console.log(response);
+                },
+                error:function(xhr,error,http)
+                {
+                    console.log(xhr.responseText);
+                    console.log(xhr+error+http);
+                }
+            });
+            console.log(obj);
+        }
         $("#addMoreFiles").on("change",function(){
             alert($(this)[0].files.length);
             if($(this)[0].files.length>0){
@@ -210,18 +247,22 @@
             var output='<div class="convert_doc right_doc image-canvas-li" data-number="0"><div class="convert_doc_content"><div class="download_convert_doc"><img src="https://toppng.com/uploads/preview/pdf-icon-11549528510ilxx4eex38.png" alt=""></div></div><div class="download_icon_doc remove_icon_doc"><a class="remove-uploaded-file" href="#" data-number="0"><img src="frontend-assets/freeconvert/img/close_icon.svg"></a></div><div class="download_icon_doc"><a class="save-image-page" href="#" data-number="0"><img src="frontend-assets/freeconvert/img/download_arrow.svg"></a></div><div class="name_doc"><h6>result (2).docx</h6></div></div>';
             var output= '';
             
-    
             $.each(allFiles,function(index,value){
-                // formData.append("files[]",value.files);
+               
 
-                alert(value.files);
+
                 var url=URL.createObjectURL(value);
                 console.log(url);
                 output +='<div class="convert_doc right_doc image-canvas-li" data-number="0"><div class="convert_doc_content"><div class="download_convert_doc"><img src="'+url+'" alt=""></div></div><div class="download_icon_doc remove_icon_doc"><a class="remove-uploaded-file" href="#" data-number="0"><img src="frontend-assets/freeconvert/img/close_icon.svg"></a></div><div class="download_icon_doc"><a class="save-image-page" href="#" data-number="0"><img src="frontend-assets/freeconvert/img/download_arrow.svg"></a></div><div class="name_doc"><h6>'+value.name+'</h6></div></div>';
             });
-            return output;
+
+
+            // return output;
         }
+       
 
     });
 </script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
+

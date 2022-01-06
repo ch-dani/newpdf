@@ -221,7 +221,7 @@
 </script>
 <script src="https://freeconvertpdf.com/js/pdf-loader.js"></script>
 
-<script src="https://freeconvertpdf.com/js/simpleviewer.js"></script>
+<!-- <script src="https://freeconvertpdf.com/js/simpleviewer.js"></script> -->
 <script src="https://freeconvertpdf.com/js/new_viewer.js"></script>
 <script type="text/javascript" src="https://freeconvertpdf.com/js/dropbox-chooser.js"></script>
 <script type="text/javascript" src="https://freeconvertpdf.com/js/dropbox-saver.js"></script>

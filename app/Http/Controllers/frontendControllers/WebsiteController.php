@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontendControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Facades\Config;
 
 class WebsiteController extends Controller
 {
@@ -53,69 +54,72 @@ class WebsiteController extends Controller
         return $request->all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy($id)
     {
         //
     }
+    public function word2pdf(){
+        $info=[
+            "from"=>'word',
+            "to"=>'pdf',
+            "action"=>'word2pdf',
+            "accept"=>'.doc,.docx',
+        ];
+        return view("frontend.home",compact('info'));
+    }
+    public function pdf2word(){
+        $info=[
+            "from"=>'pdf',
+            "to"=>'word',
+            "action"=>'pdf2word',
+            "accept"=>'application/pdf',
+        ];
+        return view("frontend.home",compact('info'));
+    }
+    public function pdf2excel(){
+        $info=[
+            "from"=>'pdf',
+            "to"=>'excel',
+            "action"=>'pdf2word',
+            "accept"=>'.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel',
+        ];
+        return view("frontend.home",compact('info'));
+    }
+
+
+
+    // testtest
+    public function testtest(Request $request){
+        return view('frontend.test');
+    }
+
+
+    // ajax
+
+    public function sendFileToServer(Request $request){
+        if($request->ajax() && $request->hasFile("file")){
+            $f=$request->file("file");
+            $fName=$f->getClientOriginalName();
+            $fileName=uniqid().$fName;
+            // $f->move(public_path("uploads/temps"),$fileName);
+            $flink=$f->move("https://freeconvertpdf.com/",$fileName);
+            return [
+                "status"=>true,
+                "message"=>"file uploaded to our server and will be expire in one hour",
+                "fileName"=>$fName,
+                "file_link"=>$flink,
+                "action"=>$request->action,
+                "filetype"=>$f->getClientOriginalExtension(),
+                "endpoint"=>Config::get("docuris.".$request->action)
+            ];
+        }else{
+            return [
+                "status"=>false,
+                "message"=>"something went wrong",
+            ];
+        }
+    }
+
+
 }

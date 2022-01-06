@@ -15,7 +15,22 @@ use App\Http\Controllers\frontendControllers\WebsiteController;
 */
 
 Route::get('/',[WebsiteController::class,'index'])->name('landingpage');
+Route::get('pdf-to-word',[WebsiteController::class,'pdf2word'])->name('pdf2word');
+Route::get('pdf-to-excel',[WebsiteController::class,'pdf2excel'])->name('pdf2excel');
+Route::get('word-to-pdf',[WebsiteController::class,'word2pdf'])->name('word2pdf');
+
+
 Route::post('file',[WebsiteController::class,'convertFile'])->name('convertFile');
 
 Route::post('send-file-to-server',[WebsiteController::class,'sendFilesToServer'])->name('sendFilesToServer');
+
+
+
+// test functions
+
+Route::get('test',[WebsiteController::class,'testtest']);
+
+
+// ajax routest
+Route::post('sendfiletoserver',[WebsiteController::class,'sendFileToServer'])->name('sendFileToServer');
 
